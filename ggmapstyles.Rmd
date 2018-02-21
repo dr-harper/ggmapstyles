@@ -1,0 +1,135 @@
+# Extracting google map styles from Snazzy Maps
+
+```{r}
+url <- "https://snazzymaps.com/style/141976/rsa"
+```
+
+Easily choose more than 10,000 basemap styles.
+
+```{r}
+library(rvest)    # For web scraping
+library(stringr)  # 
+library(jsonlite)
+library(ggplot2)
+library(gridExtra)
+```
+
+First, a function was written 
+
+```{r}
+
+extract_json <- function(url){
+  
+  json <- xml2::read_html(url) %>%
+    html_nodes("#style-json") %>% 
+    str_replace_all('<pre id="style-json">', "") %>%
+    str_replace_all("[\r]", "") %>%
+    str_replace_all(" ", "")
+
+  rList <- rjson::fromJSON(json)
+  
+  return(rList)  
+}
+
+```
+
+A function was adapted [here](https://www.r-bloggers.com/creating-styled-google-maps-in-ggmap/) to 
+
+```{r}
+#https://www.r-bloggers.com/creating-styled-google-maps-in-ggmap/
+
+create_style_string<- function(style_list){
+  style_string <- ""
+  for(i in 1:length(style_list)){
+    if("featureType" %in% names(style_list[[i]])){
+      style_string <- paste0(style_string, "feature:", 
+                             style_list[[i]]$featureType, "|")      
+    }
+    
+    if("elementType" %in% names(style_list[[i]])){
+      style_string <- paste0(style_string, "element:", 
+                             style_list[[i]]$elementType, "|")      
+    }
+    elements <- style_list[[i]]$stylers
+    a <- lapply(elements, function(x)paste0(names(x), ":", x)) %>%
+      unlist() %>%
+      paste0(collapse="|")
+    style_string <- paste0(style_string, a)
+    if(i < length(style_list)){
+      style_string <- paste0(style_string, "&style=")       
+    }
+  }  
+  # google wants 0xff0000 not #ff0000
+  style_string <- gsub("#", "0x", style_string)
+  
+  # symbols are converted within the string
+  style_string <- gsub("[|]", "%7C", style_string)
+  
+  return(style_string)
+}
+```
+
+These two separate stages are combined to make a single function:
+
+```{r}
+
+ggmapstyleSM <- function(url){
+  
+  a <- extract_json(url)
+  style <- create_style_string(a)
+  return(style)
+}
+
+
+
+
+```
+
+
+```{r}
+ExtractNameURl <- function(url){
+  
+sub('.*\\/', '', url) %>%
+  gsub("-", " ", x = .) %>%
+  str_to_title()
+}
+
+
+```
+
+
+
+```{r, fig.height=7, fig.width=7}
+
+urls <- c("https://snazzymaps.com/style/79/black-and-white",
+          "https://snazzymaps.com/style/35/avocado-world",
+          "https://snazzymaps.com/style/98/purple-rain",
+          "https://snazzymaps.com/style/84/pastel-tones",
+          "https://snazzymaps.com/style/64/old-dry-mud",
+          "https://snazzymaps.com/style/8097/wy",
+          "https://snazzymaps.com/style/83/muted-blue",
+          "https://snazzymaps.com/style/127403/no-label-bright-colors",
+          "https://snazzymaps.com/style/14/vintage")
+
+
+
+plotGrid <-
+  lapply(urls, function(x)
+ggmap(get_googlemap("Southampton, UK", style = ggmapstyleSM(x), maptype = "roadmap")) +
+  ggtitle(ExtractNameURl(x)) +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5, margin = margin(0.5, 0, 0.5, 0, unit = "cm") ))
+) %>%
+  grid.arrange(grobs = .,)
+```
+
+```{r, fig.height=7, fig.width=7}
+jpeg('rplot.jpg', width = 2000, height = 2000)
+grid.arrange(plotGrid)
+dev.off()
+
+```
+
+
+
+Should post my answer here: https://stackoverflow.com/questions/41049782/making-multiple-style-references-in-google-maps-api

@@ -120,6 +120,8 @@ urls <- c("https://snazzymaps.com/style/79/black-and-white",
 
 
 
+ggmap::register_google(key = "AIzaSyBGIdhljRFAiAqbNqYPWPf0iKbhESX2TRE")
+
 plotGrid <-
   lapply(urls, function(x)
 ggmap(get_googlemap(center = "Southampton, UK", style = ggmapstyleSM(x), maptype = "roadmap")) +
@@ -129,6 +131,7 @@ ggmap(get_googlemap(center = "Southampton, UK", style = ggmapstyleSM(x), maptype
 ) %>%
   grid.arrange(grobs = .,)
 ```
+
 
 ```{r, fig.height=7, fig.width=7}
 jpeg('rplot.jpg', width = 2000, height = 2000)
@@ -140,3 +143,23 @@ dev.off()
 
 
 Should post my answer here: https://stackoverflow.com/questions/41049782/making-multiple-style-references-in-google-maps-api
+
+
+
+
+
+```{r}
+
+
+plotGrid <-
+  lapply(urls, function(x)
+ggmap(get_googlemap(center = "Southampton, UK", style = ggmapstyleSM(x), maptype = "roadmap")) +
+  ggtitle(ExtractNameURl(x)) +
+  theme(plot.title = element_text(hjust = 0.5, margin = margin(0.5, 0, 0.5, 0, unit = "cm") ))
+) %>%
+  grid.arrange(grobs = .,)
+
+```
+
+
+

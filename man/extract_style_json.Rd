@@ -7,7 +7,7 @@
 extract_style_json(mapRef)
 }
 \arguments{
-\item{mapRef}{either the full Snazzymap page URL, or the ID of the map layer}
+\item{mapRef}{the full Snazzymap page URL, or the ID of the map layer}
 }
 \description{
 For a given web page, this function scrapes the JSON files,

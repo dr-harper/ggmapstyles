@@ -4,12 +4,12 @@
 \alias{get_snazzymap}
 \title{Create a stylised google basemap}
 \usage{
-get_snazzymap(..., url = NULL)
+get_snazzymap(..., mapRef = NULL)
 }
 \arguments{
 \item{...}{arguments to be supplied to get_googlemap}
 
-\item{map_ref}{a URL or map ID for the snazzymap style}
+\item{mapRef}{a URL or map ID for the snazzymap style}
 }
 \description{
 A wrapper for the \@code{get_googlemap}

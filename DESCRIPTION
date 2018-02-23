@@ -7,8 +7,8 @@ Maintainer: Michael Harper <m.harper@outlook.com>
 Description: Provides tools to simplify the use of map themes within the ggmap
     package. Allows the use of 16,000 existing custom styles, or allows users
     to use custom defined styles created through the website.
-License: file LICENCE
-Imports: ggmap
+License: file LICENSE
+Imports: ggmap, magrittr, rvest, rjson, stringr, xml2
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000

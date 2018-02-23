@@ -6,12 +6,12 @@
 \usage{
 ggmap_style_string(style_list)
 }
+\arguments{
+\item{style_list}{A formatted JSON object within R, as loaded by the
+extract_style_json function.}
+}
 \description{
 Creates a google maps style URL string from the formatted JSON table. 
   The output of this function can be used within the style argument of
   get_googlemap.
-  
-  
-  
-  @export
 }

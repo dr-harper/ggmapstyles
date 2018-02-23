@@ -4,9 +4,10 @@
 #'   The output of this function can be used within the style argument of
 #'   get_googlemap.
 #'   
+#' @param style_list A formatted JSON object within R, as loaded by the
+#'   extract_style_json function.
 #'   
-#'   
-#'   @export
+#' @export
 ggmap_style_string <- function(style_list){
   style_string <- ""
   for(i in 1:length(style_list)){

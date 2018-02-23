@@ -4,7 +4,10 @@
 \alias{ggmap_style_sm}
 \title{Create a style string for}
 \usage{
-ggmap_style_sm(url)
+ggmap_style_sm(mapRef)
+}
+\arguments{
+\item{mapRef}{the full Snazzymap page URL, or the ID of the map layer}
 }
 \description{
 Create a style string for

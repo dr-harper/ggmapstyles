@@ -1,9 +1,15 @@
 #' Create a style string for
-
-
-ggmap_style_sm <- function(url){
+#' 
+#' @param mapRef the full Snazzymap page URL, or the ID of the map layer
+#' 
+#' @export
+#' 
+ggmap_style_sm <- function(mapRef){
   
-  a <- extract_json(url)
-  style <- create_style_string(a)
+  # Find the full URL
+  url <- smart_url(mapRef)
+  
+  a <- extract_style_json(url)
+  style <- ggmap_style_string(a)
   return(style)
 }

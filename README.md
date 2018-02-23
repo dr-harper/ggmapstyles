@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-ggmapstyles <img src="man/images/snazzymaps.JPG" align="right" />
-=================================================================
+ggmapstyles <img src="man/images/SnazzyMaps-Icon-Transparent.png" align="right" />
+==================================================================================
 
 [![Travis-CI Build Status](https://travis-ci.org/mikey-harper/ggmapstyles.svg?branch=master)](https://travis-ci.org/mikey-harper/ggmapstyles) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mikey-harper/ggmapstyles?branch=master&svg=true)](https://ci.appveyor.com/project/mikey-harper/ggmapstyles) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
@@ -31,6 +31,11 @@ You can browse [Snazzy Maps](https://snazzymaps.com/) to find a style you like. 
 
 The main function to use within the package is `get_snazzymap`. This is a wrapper of the `get_googlemap` function, with the style of the map being set by `mapRef`:
 
+``` r
+basemap <- get_snazzymap("Southampton, UK", mapRef = "https://snazzymaps.com/style/83/muted-blue")
+ggmap(basemap)
+```
+
 ![](man/figures/README-unnamed-chunk-3-1.png)
 
 The `mapRef` parameter can accept the Snazzy Map reference in a number of different ways:
@@ -41,8 +46,34 @@ The `mapRef` parameter can accept the Snazzy Map reference in a number of differ
 
 You can also supply additional arguments to the `get_snazzymap` function which are provided to `get_googlemap`. For example, the zoom can be changed as follows:
 
+``` r
+basemap <- get_snazzymap("Southampton, UK", mapRef = "98/purple-rain", zoom = 15)
+ggmap(basemap)
+```
+
 ![](man/figures/README-unnamed-chunk-4-1.png)
 
 If you would rather use the `style` argument within the `get_googlemap`, you can create a formatted string using the `ggmap_style_sm` function:
 
-    #> [1] "feature:road%7Chue:0x5e00ff%7Csaturation:-79&style=feature:poi%7Csaturation:-78%7Chue:0x6600ff%7Clightness:-47%7Cvisibility:off&style=feature:road.local%7Clightness:22&style=feature:landscape%7Chue:0x6600ff%7Csaturation:-11&style=&style=&style=feature:water%7Csaturation:-65%7Chue:0x1900ff%7Clightness:8&style=feature:road.local%7Cweight:1.3%7Clightness:30&style=feature:transit%7Cvisibility:simplified%7Chue:0x5e00ff%7Csaturation:-16&style=feature:transit.line%7Csaturation:-72&style="
+``` r
+style_string <- ggmap_style_sm("84/pastel-tones")
+style_string
+#> [1] "feature:landscape%7Csaturation:-100%7Clightness:60&style=feature:road.local%7Csaturation:-100%7Clightness:40%7Cvisibility:on&style=feature:transit%7Csaturation:-100%7Cvisibility:simplified&style=feature:administrative.province%7Cvisibility:off&style=feature:water%7Cvisibility:on%7Clightness:30&style=feature:road.highway%7Celement:geometry.fill%7Ccolor:0xef8c25%7Clightness:40&style=feature:road.highway%7Celement:geometry.stroke%7Cvisibility:off&style=feature:poi.park%7Celement:geometry.fill%7Ccolor:0xb6c54c%7Clightness:40%7Csaturation:-40&style="
+```
+
+This string can then easily be reused within any other ggmap function which takes a style argument. This approach is recommended if you want to plot multiple maps with the same basemap:
+
+``` r
+plot1 <- ggmap(get_googlemap("Southampton, UK", style = style_string)) + labs(title = "Southampton")
+plot2 <- ggmap(get_googlemap("London, UK", style = style_string)) + labs(title = "London")
+plot3 <- ggmap(get_googlemap("Bristol, UK", style = style_string)) + labs(title = "Bristol")
+
+gridExtra::grid.arrange(plot1, plot2, plot3, ncol = 3)
+```
+
+![](man/figures/README-unnamed-chunk-6-1.png)
+
+Additional Reading
+------------------
+
+[This cheatsheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf) into ggmap is useful fo rpicking up some of the basics of ggmap.

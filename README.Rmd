@@ -14,12 +14,15 @@ library(ggmap)
 library(ggmapstyles)
 library(tidyverse)
 library(rvest)
+
+options(scipen = 999)
 ```
 
 # ggmapstyles <img src="man/images/snazzymaps.JPG" align="right" />
 
 [![Travis-CI Build Status](https://travis-ci.org/mikey-harper/ggmapstyles.svg?branch=master)](https://travis-ci.org/mikey-harper/ggmapstyles)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mikey-harper/ggmapstyles?branch=master&svg=true)](https://ci.appveyor.com/project/mikey-harper/ggmapstyles)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 *****
 ## Overview
@@ -43,7 +46,7 @@ countStyles <- (floor(countStyles/1000)*1000)
 
 Say goodbye to the standard Google Maps background, and easily choose from one of over `r countStyles` custom themes! If you cannot find a style you like, it is easy to sign up and create your own customised layers.
 
-```{r, fig.height=5, fig.width=10, echo = FALSE, message = FALSE}
+```{r, fig.height=7.5, fig.width=15, echo = FALSE, message = FALSE}
 # List maps to include
 urls <- c("https://snazzymaps.com/style/35/avocado-world",
           "https://snazzymaps.com/style/98/purple-rain",

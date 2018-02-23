@@ -1,7 +1,7 @@
 Package: ggmapstyles
 Type: Package
 Title: Integrates ggmap with additional Google Maps styles through SnazzyMaps
-Version: 1.0.0
+Version: 0.1.0
 Author: Michael Harper
 Maintainer: Michael Harper <m.harper@outlook.com>
 Description: Provides tools to simplify the use of map themes within the ggmap

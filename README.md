@@ -32,6 +32,7 @@ You can browse [Snazzy Maps](https://snazzymaps.com/) to find a style you like. 
 The main function to use within the package is `get_snazzymap`. This is a wrapper of the `get_googlemap` function, with the style of the map being set by `mapRef`:
 
 ``` r
+library(ggmapstyles)
 basemap <- get_snazzymap("Southampton, UK", mapRef = "https://snazzymaps.com/style/83/muted-blue")
 ggmap(basemap)
 ```
@@ -76,4 +77,4 @@ gridExtra::grid.arrange(plot1, plot2, plot3, ncol = 3)
 Additional Reading
 ------------------
 
-[This cheatsheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf) into ggmap is useful fo rpicking up some of the basics of ggmap.
+[This cheatsheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf) into ggmap is useful for picking up some of the basics of ggmap.

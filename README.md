@@ -14,7 +14,7 @@ Overview
 
 Say goodbye to the standard Google Maps background, and easily choose from one of over 17000 custom themes! If you cannot find a style you like, it is easy to sign up and create your own customised layers.
 
-![](man/figures/README-unnamed-chunk-2-1.png)
+<img src="man/figures/README-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
 
 Installation
 ------------
@@ -37,7 +37,7 @@ basemap <- get_snazzymap("Southampton, UK", mapRef = "https://snazzymaps.com/sty
 ggmap(basemap)
 ```
 
-![](man/figures/README-unnamed-chunk-3-1.png)
+<img src="man/figures/README-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
 
 The `mapRef` parameter can accept the Snazzy Map reference in a number of different ways:
 
@@ -52,7 +52,7 @@ basemap <- get_snazzymap("Southampton, UK", mapRef = "98/purple-rain", zoom = 15
 ggmap(basemap)
 ```
 
-![](man/figures/README-unnamed-chunk-4-1.png)
+<img src="man/figures/README-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
 
 If you would rather use the `style` argument within the `get_googlemap`, you can create a formatted string using the `ggmap_style_sm` function:
 
@@ -72,7 +72,7 @@ plot3 <- ggmap(get_googlemap("Bristol, UK", style = style_string)) + labs(title 
 gridExtra::grid.arrange(plot1, plot2, plot3, ncol = 3)
 ```
 
-![](man/figures/README-unnamed-chunk-6-1.png)
+<img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
 Cached Styles
 -------------

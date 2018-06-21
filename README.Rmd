@@ -46,7 +46,7 @@ countStyles <- (floor(countStyles/1000)*1000)
 
 Say goodbye to the standard Google Maps background, and easily choose from one of over `r countStyles` custom themes! If you cannot find a style you like, it is easy to sign up and create your own customised layers.
 
-```{r, fig.height=7.5, fig.width=15, echo = FALSE, message = FALSE}
+```{r, fig.height=7.5, fig.width=7.5, echo = FALSE, message = FALSE, warning = FALSE}
 # List maps to include
 urls <- c("https://snazzymaps.com/style/35/avocado-world",
           "https://snazzymaps.com/style/98/purple-rain",
@@ -55,7 +55,7 @@ urls <- c("https://snazzymaps.com/style/35/avocado-world",
           "https://snazzymaps.com/style/8097/wy",
           "https://snazzymaps.com/style/83/muted-blue",
           "https://snazzymaps.com/style/127403/no-label-bright-colors",
-          "https://snazzymaps.com/style/14/vintage")
+          "https://snazzymaps.com/style/60952")
 
 
 # API key is stored in a file not synced with GitHub
@@ -122,6 +122,26 @@ plot2 <- ggmap(get_googlemap("London, UK", style = style_string)) + labs(title =
 plot3 <- ggmap(get_googlemap("Bristol, UK", style = style_string)) + labs(title = "Bristol")
 
 gridExtra::grid.arrange(plot1, plot2, plot3, ncol = 3)
+```
+
+## Cached Styles
+
+16 map styles are supplied within the package. These can be accessed by using the `map_styles()` function, and the following styles are available:
+
+```{r}
+knitr::kable(ggmapstyles::list_styles())
+```
+
+
+```{r, echo = TRUE}
+# search by name
+map_style("Blue Essence")
+
+# search by ID
+map_style(ID = "40")
+
+# Use directly within ggmap function
+ggmap::get_googlemap("Southampton", style = map_style("Apple Like"))
 ```
 
 ## Additional Reading

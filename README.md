@@ -12,7 +12,7 @@ Overview
 
 **ggmapstyles** is an R package which extends the [ggmap](https://github.com/dkahle/ggmap) package. This package simplifes the process of creating custom designs for Google Maps, and provides a range of tools for quickly loading themes from [Snazzy Maps](https://snazzymaps.com/) by simply copying a website URL.
 
-Say goodbye to the standard Google Maps background, and easily choose from one of over 16000 custom themes! If you cannot find a style you like, it is easy to sign up and create your own customised layers.
+Say goodbye to the standard Google Maps background, and easily choose from one of over 17000 custom themes! If you cannot find a style you like, it is easy to sign up and create your own customised layers.
 
 ![](man/figures/README-unnamed-chunk-2-1.png)
 
@@ -73,6 +73,47 @@ gridExtra::grid.arrange(plot1, plot2, plot3, ncol = 3)
 ```
 
 ![](man/figures/README-unnamed-chunk-6-1.png)
+
+Cached Styles
+-------------
+
+16 map styles are supplied within the package. These can be accessed by using the `map_styles()` function, and the following styles are available:
+
+|      ID| Name                   | Description                                                        |
+|-------:|:-----------------------|:-------------------------------------------------------------------|
+|      61| Blue Essence           | A light blue style that helps you focus on content on the map.     |
+|      35| Avocado World          | A creamy green color palette.                                      |
+|      98| Purple Rain            | Everything on this map is a pleasant shade of desaturated purple.  |
+|      84| Pastel Tones           | Simple pastel look and feel.                                       |
+|      64| Old Dry Mud            | Orange with pale blue sea.                                         |
+|    8097| WY                     | Map style for WY default color scheme.                             |
+|   60952| apple-like             | Similar to Apple Maps.                                             |
+|      23| Bates Green            | A nice, simple green version of the map.                           |
+|      83| Muted Blue             | An unobtrusive blue design for minimal user-experiences.           |
+|  127403| No label Bright Colors | A map without label and brighter colors.                           |
+|      14| Vintage                | A dark two-tone map with a striking red color against a dark grey. |
+|      68| Aqua                   | A cool two tone map that looks great when zoomed in.               |
+|      72| Transport for London   | Style based on London transport maps.                              |
+|    6296| darkdetail             | minimal, dark grayscale, retaining POI labels.                     |
+|      21| Hopper                 | Based upon Edward Hopper's paintings.                              |
+|      40| Vitamin C              | Inspired by the Adobe Kuler theme of the same name.                |
+|   72543| Assassin's Creed IV    | Themed map matching the colors from Assassin's Creed IV.           |
+
+``` r
+# search by name
+map_style("Blue Essence")
+#> [1] "feature:landscape.natural%7Celement:geometry.fill%7Cvisibility:on%7Ccolor:0xe0efef&style=feature:poi%7Celement:geometry.fill%7Cvisibility:on%7Chue:0x1900ff%7Ccolor:0xc0e8e8&style=feature:road%7Celement:geometry%7Clightness:100%7Cvisibility:simplified&style=feature:road%7Celement:labels%7Cvisibility:off&style=feature:transit.line%7Celement:geometry%7Cvisibility:on%7Clightness:700&style=feature:water%7Celement:all%7Ccolor:0x7dcdcd"
+
+# search by ID
+map_style(ID = "40")
+#> [1] "feature:water%7Celement:geometry%7Ccolor:0x004358&style=feature:landscape%7Celement:geometry%7Ccolor:0x1f8a70&style=feature:poi%7Celement:geometry%7Ccolor:0x1f8a70&style=feature:road.highway%7Celement:geometry%7Ccolor:0xfd7400&style=feature:road.arterial%7Celement:geometry%7Ccolor:0x1f8a70%7Clightness:-20&style=feature:road.local%7Celement:geometry%7Ccolor:0x1f8a70%7Clightness:-17&style=element:labels.text.stroke%7Ccolor:0xffffff%7Cvisibility:on%7Cweight:0.9&style=element:labels.text.fill%7Cvisibility:on%7Ccolor:0xffffff&style=feature:poi%7Celement:labels%7Cvisibility:simplified&style=element:labels.icon%7Cvisibility:off&style=feature:transit%7Celement:geometry%7Ccolor:0x1f8a70%7Clightness:-10&style=&style=feature:administrative%7Celement:geometry%7Ccolor:0x1f8a70%7Cweight:0.7"
+
+# Use directly within ggmap function
+ggmap::get_googlemap("Southampton", style = map_style("Apple Like"))
+#> Source : https://maps.googleapis.com/maps/api/staticmap?center=Southampton&zoom=10&size=640x640&scale=2&maptype=terrain&style=&key=AIzaSyBGIdhljRFAiAqbNqYPWPf0iKbhESX2TRE
+#> Source : https://maps.googleapis.com/maps/api/geocode/json?address=Southampton&key=AIzaSyBGIdhljRFAiAqbNqYPWPf0iKbhESX2TRE
+#> 1280x1280 terrain map image from Google Maps.  see ?ggmap to plot it.
+```
 
 Additional Reading
 ------------------

@@ -14,13 +14,18 @@ extract_style_json <- function(mapRef){
   # Find the full URL
   url <- smart_url(mapRef)
   
-  json <- xml2::read_html(url) %>%
-    rvest::html_nodes("#style-json") %>% 
+  json <- suppressWarnings(
+    xml2::read_html(url) %>%
+    rvest::html_nodes("#style-json") %>%
     stringr::str_replace_all('<pre id="style-json">', "") %>%
     stringr::str_replace_all("[\r]", "") %>%
-    stringr::str_replace_all(" ", "")
+    stringr::str_replace_all(" ", "") %>%
+    stringr::str_replace_all(":\\&style", "\\&style") %>%
+    stringr::str_replace_all("\\&style\\&style", "\\&style")
+  )
   
-  rList <- rjson::fromJSON(json)
-  
-  return(rList)  
+  # bug in Rjson throws error currently
+  # https://github.com/dkahle/ggmap/issues/217
+  rList <- invisible(rjson::fromJSON(json))
+  return(rList)
 }

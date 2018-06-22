@@ -106,7 +106,7 @@ You can browse [Snazzy Maps](https://snazzymaps.com/) to find a style you like. 
 
 The main function to use within the package is `get_snazzymap`. This is a wrapper of the `get_googlemap` function, with the style of the map being set by `mapRef`:
 
-```{r, message = FALSE, echo = TRUE}
+```{r exampleMap, message = FALSE, echo = TRUE}
 library(ggmapstyles)
 basemap <- get_snazzymap("Southampton, UK", mapRef = "https://snazzymaps.com/style/83/muted-blue")
 ggmap(basemap)
@@ -120,21 +120,21 @@ The `mapRef` parameter can accept the Snazzy Map reference in a number of differ
 
 You can also supply additional arguments to the `get_snazzymap` function which are provided to `get_googlemap`. For example, the zoom can be changed as follows:
 
-```{r, message = FALSE, echo = TRUE, cache = TRUE}
+```{r themeTwo, message = FALSE, echo = TRUE, cache = TRUE}
 basemap <- get_snazzymap("Southampton, UK", mapRef = "98/purple-rain", zoom = 15)
 ggmap(basemap)
 ```
 
 If you would rather use the `style` argument within the `get_googlemap`, you can create a formatted string using the `ggmap_style_sm` function:
 
-```{r, message = FALSE, echo = TRUE}
+```{r extractStyleString, message = FALSE, echo = TRUE}
 style_string <- ggmap_style_sm("84/pastel-tones")
 style_string
 ```
 
 This string can then easily be reused within any other ggmap function which takes a style argument. This approach is recommended if you want to plot multiple maps with the same basemap:
 
-```{r, echo=TRUE, fig.height=3.3, fig.width=10, message=FALSE, cache = TRUE}
+```{r StyleStringMultiple, echo=TRUE, fig.height=3.3, fig.width=10, message=FALSE, cache = TRUE}
 plot1 <- ggmap(get_googlemap("Southampton, UK", style = style_string)) + labs(title = "Southampton")
 plot2 <- ggmap(get_googlemap("London, UK", style = style_string)) + labs(title = "London")
 plot3 <- ggmap(get_googlemap("Bristol, UK", style = style_string)) + labs(title = "Bristol")
@@ -146,7 +146,7 @@ gridExtra::grid.arrange(plot1, plot2, plot3, ncol = 3)
 
 16 map styles are supplied within the package. These can be accessed by using the `map_styles()` function, and the following styles are available:
 
-```{r}
+```{r tableOfStyles}
 knitr::kable(ggmapstyles::list_styles())
 ```
 

@@ -18,6 +18,9 @@ library(tidyverse)
 library(rvest)
 
 options(scipen = 999)
+
+# API key is stored in a file not synced with GitHub
+source("key/googleKey.R")
 ```
 
 # ggmapstyles <img src="man/images/SnazzyMaps-Icon-Transparent.png" align="right" />
@@ -27,6 +30,7 @@ options(scipen = 999)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 *****
+
 ## Overview
 
 **ggmapstyles** is an R package which extends the [ggmap](https://github.com/dkahle/ggmap) package. This package simplifes the process of creating custom designs for Google Maps, and provides a range of tools for quickly loading themes from [Snazzy Maps](https://snazzymaps.com/) by simply copying a website URL.
@@ -48,7 +52,11 @@ countStyles <- (floor(countStyles/1000)*1000)
 
 Say goodbye to the standard Google Maps background, and easily choose from one of over `r countStyles` custom themes! If you cannot find a style you like, it is easy to sign up and create your own customised layers.
 
-```{r, fig.height=8, fig.width=8, echo = FALSE, message = FALSE, warning = FALSE}
+> This package is still in development. If you find any errors, or have any suggestions for improvements, please open an [Issue](https://github.com/mikey-harper/ggmapstyles/issues).
+
+A selection of some of the styles available are shown below:
+
+```{r maps, fig.height=8, fig.width=8, echo = FALSE, message = FALSE, warning = FALSE, fig.align="center", cache = TRUE}
 # List maps to include
 urls <- c("https://snazzymaps.com/style/35/avocado-world",
           "https://snazzymaps.com/style/98/purple-rain",
@@ -66,11 +74,6 @@ urls <- c("https://snazzymaps.com/style/35/avocado-world",
           "https://snazzymaps.com/style/6296/darkdetail",
           "https://snazzymaps.com/style/21/hopper",
           "https://snazzymaps.com/style/40/vitamin-c")
-
-
-
-# API key is stored in a file not synced with GitHub
-source("key/googleKey.R")
 
 # Create Plot
 plotGrid <-
@@ -117,7 +120,7 @@ The `mapRef` parameter can accept the Snazzy Map reference in a number of differ
 
 You can also supply additional arguments to the `get_snazzymap` function which are provided to `get_googlemap`. For example, the zoom can be changed as follows:
 
-```{r, message = FALSE, echo = TRUE}
+```{r, message = FALSE, echo = TRUE, cache = TRUE}
 basemap <- get_snazzymap("Southampton, UK", mapRef = "98/purple-rain", zoom = 15)
 ggmap(basemap)
 ```
@@ -131,7 +134,7 @@ style_string
 
 This string can then easily be reused within any other ggmap function which takes a style argument. This approach is recommended if you want to plot multiple maps with the same basemap:
 
-```{r, echo=TRUE, fig.height=3.3, fig.width=10, message=FALSE}
+```{r, echo=TRUE, fig.height=3.3, fig.width=10, message=FALSE, cache = TRUE}
 plot1 <- ggmap(get_googlemap("Southampton, UK", style = style_string)) + labs(title = "Southampton")
 plot2 <- ggmap(get_googlemap("London, UK", style = style_string)) + labs(title = "London")
 plot3 <- ggmap(get_googlemap("Bristol, UK", style = style_string)) + labs(title = "Bristol")
@@ -153,7 +156,7 @@ There are several ways you can use this function to refer to a style:
 - By ID: `map_style(ID = "40")`
 - Pick one style at random: `map_style(random = TRUE)`: this also prints a message so that you know which style to reuse.
 
-```{r, echo = TRUE}
+```{r mapStyles, echo = TRUE}
 # search by name
 map_style("Blue Essence")
 

@@ -14,7 +14,11 @@ Overview
 
 Say goodbye to the standard Google Maps background, and easily choose from one of over 17000 custom themes! If you cannot find a style you like, it is easy to sign up and create your own customised layers.
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+> This package is still in development. If you find any errors, or have any suggestions for improvements, please open an [Issue](https://github.com/mikey-harper/ggmapstyles/issues).
+
+A selection of some of the styles available are shown below:
+
+<img src="man/figures/README-maps-1.png" style="display: block; margin: auto;" />
 
 Installation
 ------------
@@ -34,10 +38,11 @@ The main function to use within the package is `get_snazzymap`. This is a wrappe
 ``` r
 library(ggmapstyles)
 basemap <- get_snazzymap("Southampton, UK", mapRef = "https://snazzymaps.com/style/83/muted-blue")
+#> Warning: package 'bindrcpp' was built under R version 3.4.4
 ggmap(basemap)
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
 
 The `mapRef` parameter can accept the Snazzy Map reference in a number of different ways:
 
@@ -52,7 +57,7 @@ basemap <- get_snazzymap("Southampton, UK", mapRef = "98/purple-rain", zoom = 15
 ggmap(basemap)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
 
 If you would rather use the `style` argument within the `get_googlemap`, you can create a formatted string using the `ggmap_style_sm` function:
 
@@ -72,7 +77,7 @@ plot3 <- ggmap(get_googlemap("Bristol, UK", style = style_string)) + labs(title 
 gridExtra::grid.arrange(plot1, plot2, plot3, ncol = 3)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
 Cached Styles
 -------------

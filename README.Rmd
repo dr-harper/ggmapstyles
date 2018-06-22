@@ -5,12 +5,13 @@
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  echo = FALSE,
-  fig.align = "center"
+                      collapse = TRUE,
+                      comment = "#>",
+                      fig.path = "man/figures/README-",
+                      echo = FALSE,
+                      fig.align = "center"
 )
+
 library(ggmap)
 library(ggmapstyles)
 library(tidyverse)
@@ -47,16 +48,25 @@ countStyles <- (floor(countStyles/1000)*1000)
 
 Say goodbye to the standard Google Maps background, and easily choose from one of over `r countStyles` custom themes! If you cannot find a style you like, it is easy to sign up and create your own customised layers.
 
-```{r, fig.height=7.5, fig.width=7.5, echo = FALSE, message = FALSE, warning = FALSE}
+```{r, fig.height=8, fig.width=8, echo = FALSE, message = FALSE, warning = FALSE}
 # List maps to include
 urls <- c("https://snazzymaps.com/style/35/avocado-world",
           "https://snazzymaps.com/style/98/purple-rain",
           "https://snazzymaps.com/style/84/pastel-tones",
           "https://snazzymaps.com/style/64/old-dry-mud",
           "https://snazzymaps.com/style/8097/wy",
+          "https://snazzymaps.com/style/23/bates-green",
+          "https://snazzymaps.com/style/127403/no-label-bright-colors",
           "https://snazzymaps.com/style/83/muted-blue",
           "https://snazzymaps.com/style/127403/no-label-bright-colors",
-          "https://snazzymaps.com/style/60952")
+          "https://snazzymaps.com/style/14/vintage",
+          "https://snazzymaps.com/style/68/aqua",
+          "https://snazzymaps.com/style/126378/vintage-old-golden-brown",
+          "https://snazzymaps.com/style/72/transport-for-london",
+          "https://snazzymaps.com/style/6296/darkdetail",
+          "https://snazzymaps.com/style/21/hopper",
+          "https://snazzymaps.com/style/40/vitamin-c")
+
 
 
 # API key is stored in a file not synced with GitHub
@@ -67,12 +77,15 @@ plotGrid <-
   lapply(urls, function(x)
 ggmap(get_snazzymap(center = "Southampton, UK", mapRef = x, maptype = "roadmap")) +
   theme_void() +
-  annotate(geom = "label", x = -1.404351, y = 50.9097, label = paste0(basename(dirname(x)), "/\n", basename(x)), alpha = 0.75) +
+  annotate(geom = "label", x = -0.97, y = 50.64, 
+           label = paste0("Style ID: ", basename(dirname(x))), 
+           hjust = 1, vjust = 0, label.r = unit(0, "lines"), label.size = 0) +
   theme(plot.title = element_text(hjust = 0.5, margin = margin(0.5, 0, 0.5, 0, unit = "cm") ))
 )
 
 # Plot the results
 gridExtra::grid.arrange(grobs = plotGrid, ncol = 4)
+
 ```
 
 ## Installation
@@ -134,6 +147,11 @@ gridExtra::grid.arrange(plot1, plot2, plot3, ncol = 3)
 knitr::kable(ggmapstyles::list_styles())
 ```
 
+There are several ways you can use this function to refer to a style:
+
+- By name: `map_style("Blue Essence")`
+- By ID: `map_style(ID = "40")`
+- Pick one style at random: `map_style(random = TRUE)`: this also prints a message so that you know which style to reuse.
 
 ```{r, echo = TRUE}
 # search by name
@@ -143,7 +161,7 @@ map_style("Blue Essence")
 map_style(ID = "40")
 
 # Use directly within ggmap function
-ggmap::get_googlemap("Southampton", style = map_style("Apple Like"))
+ggmap::get_googlemap("Southampton", style = map_style("apple-like"))
 ```
 
 ## Additional Reading

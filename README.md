@@ -25,7 +25,7 @@ Installation
 
 You can install the development version of the package through Github. It is also recommended that you install the development version of ggmap, as this has increased the size of the maximum URL allowed and allows for more complex styles to be created.
 
-    devtools::install_github("mikey-harper/ggmapstyles")
+    devtools::install_github("dr-harper/ggmapstyles")
     devtools::install_github("dkahle/ggmap")
 
 Usage

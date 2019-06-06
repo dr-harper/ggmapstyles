@@ -3,6 +3,8 @@
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(
                       collapse = TRUE,
@@ -18,18 +20,20 @@ library(tidyverse)
 library(rvest)
 
 options(scipen = 999)
-
-# API key is stored in a file not synced with GitHub
-source("key/googleKey.R")
 ```
 
-# ggmapstyles <img src="man/images/SnazzyMaps-Icon-Transparent.png" align="right" />
+# ggmapstyles 
 
 [![Travis-CI Build Status](https://travis-ci.org/mikey-harper/ggmapstyles.svg?branch=master)](https://travis-ci.org/mikey-harper/ggmapstyles)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mikey-harper/ggmapstyles?branch=master&svg=true)](https://ci.appveyor.com/project/mikey-harper/ggmapstyles)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 *****
+
+```{r, out.width="100%", fig.width=4}
+knitr::include_graphics("ggmapstylesCover.png")
+```
+
 
 ## Overview
 
@@ -79,10 +83,10 @@ urls <- c("https://snazzymaps.com/style/35/avocado-world",
 plotGrid <-
   lapply(urls, function(x)
 ggmap(get_snazzymap(center = "Southampton, UK", mapRef = x, maptype = "roadmap")) +
-  theme_void() +
   annotate(geom = "label", x = -0.97, y = 50.64, 
            label = paste0("Style ID: ", basename(dirname(x))), 
            hjust = 1, vjust = 0, label.r = unit(0, "lines"), label.size = 0) +
+  theme_void() +
   theme(plot.title = element_text(hjust = 0.5, margin = margin(0.5, 0, 0.5, 0, unit = "cm") ))
 )
 
@@ -93,12 +97,13 @@ gridExtra::grid.arrange(grobs = plotGrid, ncol = 4)
 
 ## Installation
 
-You can install the development version of the package through Github. It is also recommended that you install the development version of ggmap, as this has increased the size of the maximum URL allowed and allows for more complex styles to be created. 
+You can install the development version of the package through Github:
 
 ```
-devtools::install_github("mikey-harper/ggmapstyles")
-devtools::install_github("dkahle/ggmap")
+devtools::install_github("dr-harper/ggmapstyles")
 ```
+
+Google recently changed their API requirements, so you will need to register with Google first. A useful guide is found in the **ggmaps** package: https://github.com/dkahle/ggmap
 
 ## Usage
 

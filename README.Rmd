@@ -131,6 +131,21 @@ basemap <- get_snazzymap("Southampton, UK", mapRef = "98/purple-rain", zoom = 15
 ggmap(basemap)
 ```
 
+It's useful to note that the `maptype` argument of `get_googlemap` still defaults to returning a terrain map. This may make the Snazzymaps styling look different from expected, and different from the appearance on the Snazzymaps site, where the default is a roadmap. This is mostly useful for styling terrain or roadmaps; some, but not all, styling will show up with hybrid maps as well.
+
+```{r maptype, message=FALSE, echo=TRUE, cache=TRUE, fig.height=3.3, fig.width=10}
+# default: terrain
+terrain <- ggmap(get_snazzymap("Southampton, UK", mapRef = "23/bates-green")) +
+  ggtitle("Terrain")
+roadmap <- ggmap(get_snazzymap("Southampton, UK", mapRef = "23/bates-green", maptype = "roadmap")) +
+  ggtitle("Roadmap")
+hybrid <- ggmap(get_snazzymap("Southampton, UK", mapRef = "23/bates-green", maptype = "hybrid")) +
+  ggtitle("Hybrid")
+
+gridExtra::grid.arrange(terrain, roadmap, hybrid, ncol = 3)
+```
+
+
 If you would rather use the `style` argument within the `get_googlemap`, you can create a formatted string using the `ggmap_style_sm` function:
 
 ```{r extractStyleString, message = FALSE, echo = TRUE}

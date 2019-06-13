@@ -31,8 +31,7 @@ like, it is easy to sign up and create your own customised layers.
 > any suggestions for improvements, please open an
 > [Issue](https://github.com/mikey-harper/ggmapstyles/issues).
 
-A selection of some of the styles available are shown
-below:
+A selection of some of the styles available are shown below:
 
 <img src="man/figures/README-maps-1.png" width="100%" style="display: block; margin: auto;" />
 
@@ -73,8 +72,7 @@ of different ways:
 
 You can also supply additional arguments to the `get_snazzymap` function
 which are provided to `get_googlemap`. For example, the zoom can be
-changed as
-follows:
+changed as follows:
 
 ``` r
 basemap <- get_snazzymap("Southampton, UK", mapRef = "98/purple-rain", zoom = 15)
@@ -82,6 +80,27 @@ ggmap(basemap)
 ```
 
 <img src="man/figures/README-themeTwo-1.png" width="100%" style="display: block; margin: auto;" />
+
+It’s useful to note that the `maptype` argument of `get_googlemap` still
+defaults to returning a terrain map. This may make the Snazzymaps
+styling look different from expected, and different from the appearance
+on the Snazzymaps site, where the default is a roadmap. This is mostly
+useful for styling terrain or roadmaps; some, but not all, styling will
+show up with hybrid maps as well.
+
+``` r
+# default: terrain
+terrain <- ggmap(get_snazzymap("Southampton, UK", mapRef = "23/bates-green")) +
+  ggtitle("Terrain")
+roadmap <- ggmap(get_snazzymap("Southampton, UK", mapRef = "23/bates-green", maptype = "roadmap")) +
+  ggtitle("Roadmap")
+hybrid <- ggmap(get_snazzymap("Southampton, UK", mapRef = "23/bates-green", maptype = "hybrid")) +
+  ggtitle("Hybrid")
+
+gridExtra::grid.arrange(terrain, roadmap, hybrid, ncol = 3)
+```
+
+<img src="man/figures/README-maptype-1.png" width="100%" style="display: block; margin: auto;" />
 
 If you would rather use the `style` argument within the `get_googlemap`,
 you can create a formatted string using the `ggmap_style_sm` function:
@@ -94,8 +113,7 @@ style_string
 
 This string can then easily be reused within any other ggmap function
 which takes a style argument. This approach is recommended if you want
-to plot multiple maps with the same
-basemap:
+to plot multiple maps with the same basemap:
 
 ``` r
 plot1 <- ggmap(get_googlemap("Southampton, UK", style = style_string)) + labs(title = "Southampton")

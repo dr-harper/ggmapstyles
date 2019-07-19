@@ -11,7 +11,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/mikey-harper/ggmapsty
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 <img src="https://img.shields.io/github/last-commit/dr-harper/ggmapstyles.svg" />
-
+<img src="https://img.shields.io/github/stars/dr-harper/ggmapstyles.svg" />
 
 -----
 
@@ -33,7 +33,8 @@ like, it is easy to sign up and create your own customised layers.
 > any suggestions for improvements, please open an
 > [Issue](https://github.com/mikey-harper/ggmapstyles/issues).
 
-A selection of some of the styles available are shown below:
+A selection of some of the styles available are shown
+below:
 
 <img src="man/figures/README-maps-1.png" width="100%" style="display: block; margin: auto;" />
 
@@ -74,7 +75,8 @@ of different ways:
 
 You can also supply additional arguments to the `get_snazzymap` function
 which are provided to `get_googlemap`. For example, the zoom can be
-changed as follows:
+changed as
+follows:
 
 ``` r
 basemap <- get_snazzymap("Southampton, UK", mapRef = "98/purple-rain", zoom = 15)
@@ -115,7 +117,8 @@ style_string
 
 This string can then easily be reused within any other ggmap function
 which takes a style argument. This approach is recommended if you want
-to plot multiple maps with the same basemap:
+to plot multiple maps with the same
+basemap:
 
 ``` r
 plot1 <- ggmap(get_googlemap("Southampton, UK", style = style_string)) + labs(title = "Southampton")
